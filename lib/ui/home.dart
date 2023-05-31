@@ -95,23 +95,17 @@ class _HomeState extends State<Home> {
                   },
                 ),
                 onTap: () async {
-                  var item =
-                      await navigateToEntryForm(context, itemList[index]);
-                  if (item != null) {
-                    await SQLHelper.updateItem(item);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EntryForm(item: itemList[index]),
+                    ),
+                  ).then((value) {
                     updateListView();
-                  }
+                  });
                 },
               ),
             ));
-  }
-
-  Future<Item> navigateToEntryForm(BuildContext context, Item? item) async {
-    var result = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const EntryForm()),
-    );
-    return result;
   }
 
   void updateListView() {

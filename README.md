@@ -3,11 +3,29 @@
 A new Flutter project.
 
 ## Getting Started
-![awal](img/awal.png)
+Tampilan Awal
 
-![form](img/form.png)
+![awal](img/awal.jpeg)
 
-![tampilan](img/tampilan.png)
+Form Tambah
+
+![form](img/tambah.jpeg)
+
+Data Bertambah
+
+![tampilan](img/data.jpeg)
+
+Form Update
+
+![ubah](img/ubah.jpeg)
+
+Data Terupdate
+
+![update](img/update.jpeg)
+
+Data dihapus
+
+![hapus](img/hapus.jpeg)
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:

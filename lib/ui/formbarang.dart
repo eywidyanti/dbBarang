@@ -6,33 +6,32 @@ import '../helper/sqlhelper.dart';
 class EntryForm extends StatefulWidget {
   const EntryForm({
     Key? key,
-    Item? item,
+    this.item,
   }) : super(key: key);
+  final Item? item;
 
   @override
   State<EntryForm> createState() => EntryFormState();
 }
 
 class EntryFormState extends State<EntryForm> {
-  Item item = Item(name: '', price: 0, kode: '', stok: 0);
-
+  late Item item = Item(name: '', price: 0, stok: 0, kode: '');
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
-  TextEditingController kodeController = TextEditingController();
   TextEditingController stokController = TextEditingController();
-
+  TextEditingController kodeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    if (item == '') {
-      nameController.text = item.name;
-      priceController.text = item.price.toString();
-      kodeController.text = item.kode;
-      stokController.text = item.stok.toString();
+    if (widget.item != null) {
+      nameController.text = widget.item!.name;
+      priceController.text = widget.item!.price.toString();
+      stokController.text = widget.item!.stok.toString();
+      kodeController.text = widget.item!.kode;
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: item != null ? const Text('Tambah') : const Text('Ubah'),
+        title: widget.item == null ? const Text('Tambah') : const Text('Ubah'),
         leading: const Icon(Icons.keyboard_arrow_left),
       ),
       body: ListView(
@@ -105,7 +104,7 @@ class EntryFormState extends State<EntryForm> {
                       textScaleFactor: 1.5,
                     ),
                     onPressed: () {
-                      if (item.name == '') {
+                      if (widget.item == null) {
                         // tambah data
                         item = Item(
                             name: nameController.text,
@@ -116,10 +115,12 @@ class EntryFormState extends State<EntryForm> {
                         Future<int> id = SQLHelper.createItem(item);
                       } else {
                         // ubah data
+                        item.id = widget.item!.id;
                         item.name = nameController.text;
                         item.price = int.parse(priceController.text);
                         item.kode = kodeController.text;
                         item.stok = int.parse(stokController.text);
+                        SQLHelper.updateItem(item);
                       }
 
                       // kembali ke layar sebelumnya dengan membawa objek item

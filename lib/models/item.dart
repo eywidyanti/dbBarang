@@ -6,6 +6,9 @@ class Item {
   late int stok;
 
   int get id => _id;
+  set id(int id) {
+    _id = id;
+  }
 
   Item(
       {required this.name,
